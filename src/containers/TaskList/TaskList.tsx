@@ -14,6 +14,7 @@ const TaskList = ({ tasks }: TaskListProps) => {
           return (
             <TaskCard
               key={task.id}
+              id={task.id}
               taskName={task.task}
               isComplete={task.isComplete}
             />
