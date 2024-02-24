@@ -43,7 +43,8 @@ export const addNewTask = async (
 export const updateTask = async (
   taskData: Partial<TaskData>
 ): Promise<TaskData> => {
-  const response = await fetch("http://localhost:8080/tasks", {
+  const taskId = taskData.id;
+  const response = await fetch(`http://localhost:8080/tasks/${taskId}`, {
     method: "PATCH",
     body: JSON.stringify(taskData),
     headers: {
