@@ -20,9 +20,7 @@ const TasksPage = () => {
   return (
     <main className={styles.container}>
       <Header />
-      <div>
-        <AddTaskInput />
-      </div>
+      <AddTaskInput />
       <TaskList tasks={tasks} />
     </main>
   );
