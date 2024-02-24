@@ -22,3 +22,7 @@ export const getAllTasks = async (): Promise<TaskData[]> => {
   const data = await response.json();
   return data;
 };
+
+// export const patchTask = async (): Promise<TaskData> => {
+
+// };
