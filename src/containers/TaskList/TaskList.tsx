@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TaskCard from "../../components/TaskCard/TaskCard";
 import { TaskData } from "../../services/task-services";
 import styles from "./TaskList.module.scss";
@@ -7,6 +8,8 @@ export interface TaskListProps {
 }
 
 const TaskList = ({ tasks }: TaskListProps) => {
+  const [selectedTask, setSelectedTask] = useState(0);
+
   return (
     <section className={styles.container}>
       {tasks &&
@@ -17,6 +20,8 @@ const TaskList = ({ tasks }: TaskListProps) => {
               id={task.id}
               taskName={task.task}
               isComplete={task.isComplete}
+              selectedTask={selectedTask}
+              setSelectedTask={setSelectedTask}
             />
           );
         })}

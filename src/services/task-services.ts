@@ -53,7 +53,25 @@ export const updateTask = async (
   });
 
   if (!response.ok) {
-    throw new Error("Failed to add task");
+    throw new Error("Failed to update task");
   }
   return response.json();
+};
+
+export const deleteTaskById = async (
+  taskData: Partial<TaskData>
+): Promise<number> => {
+  const taskId = taskData.id;
+  const response = await fetch(`http://localhost:8080/tasks/${taskId}`, {
+    method: "DELETE",
+    // body: JSON.stringify(taskData),
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete task");
+  }
+  return response.status;
 };
