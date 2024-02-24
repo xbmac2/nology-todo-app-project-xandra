@@ -8,14 +8,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const AddTaskInput = () => {
   const taskSchema = z.object({
     task: z.string().min(1, "Task must be at least 1 character long"),
-    isCompleted: z.boolean(),
+    isComplete: z.coerce.boolean(),
   });
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(taskSchema),
+    defaultValues: {
+      task: "",
+      isComplete: false,
+    },
   });
 
-  register("isComplete", { value: false });
+  // register("isComplete", { value: false });
+  console.log(errors, "errors");
 
   const addTaskHandler = (data: Partial<TaskData>) => {
     console.log(data);
@@ -37,7 +46,7 @@ const AddTaskInput = () => {
         placeholder="Add Task"
         {...register("task")}
       />
-      <input type="hidden" {...register("isComplete")} />
+      {/* <input type="hidden" {...register("isComplete")} /> */}
     </form>
   );
 };

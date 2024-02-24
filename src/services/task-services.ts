@@ -40,6 +40,19 @@ export const addNewTask = async (
   return response.json();
 };
 
-// export const patchTask = async (): Promise<TaskData> => {
+export const updateTask = async (
+  taskData: Partial<TaskData>
+): Promise<TaskData> => {
+  const response = await fetch("http://localhost:8080/tasks", {
+    method: "PATCH",
+    body: JSON.stringify(taskData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-// };
+  if (!response.ok) {
+    throw new Error("Failed to add task");
+  }
+  return response.json();
+};
