@@ -23,6 +23,36 @@ export const getAllTasks = async (): Promise<TaskData[]> => {
   return data;
 };
 
-// export const patchTask = async (): Promise<TaskData> => {
+export const addNewTask = async (
+  taskData: Partial<TaskData>
+): Promise<TaskData> => {
+  const response = await fetch("http://localhost:8080/tasks", {
+    method: "POST",
+    body: JSON.stringify(taskData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-// };
+  if (!response.ok) {
+    throw new Error("Failed to add task");
+  }
+  return response.json();
+};
+
+export const updateTask = async (
+  taskData: Partial<TaskData>
+): Promise<TaskData> => {
+  const response = await fetch("http://localhost:8080/tasks", {
+    method: "PATCH",
+    body: JSON.stringify(taskData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to add task");
+  }
+  return response.json();
+};

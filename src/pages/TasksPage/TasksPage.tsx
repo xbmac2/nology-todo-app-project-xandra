@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import TaskList from "../../containers/TaskList/TaskList";
 import { TaskData, getAllTasks } from "../../services/task-services";
 import styles from "./TaskPage.module.scss";
+import AddTaskInput from "../../components/AddTaskInput/AddTaskInput";
+import Header from "../../containers/Header/Header";
 
 const TasksPage = () => {
   const [tasks, setTasks] = useState<TaskData[] | null>(null);
@@ -17,9 +19,9 @@ const TasksPage = () => {
 
   return (
     <main className={styles.container}>
-      <h1>To Do</h1>
+      <Header />
       <div>
-        <p>add new tasks input field</p>
+        <AddTaskInput />
       </div>
       <TaskList tasks={tasks} />
     </main>
