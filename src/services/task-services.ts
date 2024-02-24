@@ -23,7 +23,9 @@ export const getAllTasks = async (): Promise<TaskData[]> => {
   return data;
 };
 
-export const addTask = async (taskData: TaskData): Promise<TaskData> => {
+export const addNewTask = async (
+  taskData: Partial<TaskData>
+): Promise<TaskData> => {
   const response = await fetch("http://localhost:8080/tasks", {
     method: "POST",
     body: JSON.stringify(taskData),
