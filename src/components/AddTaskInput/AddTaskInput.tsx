@@ -43,7 +43,7 @@ const AddTaskInput = () => {
       <input
         className={styles.input}
         type="text"
-        placeholder="Add Task"
+        placeholder="Add Task..."
         {...register("task")}
       />
       {/* <input type="hidden" {...register("isComplete")} /> */}
