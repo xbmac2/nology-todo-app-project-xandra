@@ -1,8 +1,14 @@
-import { updateTask, deleteTaskById } from "../../services/task-services";
+import { useState } from "react";
+import {
+  updateTask,
+  deleteTaskById,
+  TaskData,
+} from "../../services/task-services";
 import styles from "./TaskCard.module.scss";
 import { Square, CheckSquare, Trash } from "@phosphor-icons/react";
 
 export interface TaskCardProps {
+  task: TaskData;
   id: number;
   taskName: string;
   isComplete: boolean;
@@ -11,19 +17,22 @@ export interface TaskCardProps {
 }
 
 const TaskCard = ({
+  task,
   taskName,
   isComplete,
   id,
   selectedTask,
   setSelectedTask,
 }: TaskCardProps) => {
-  const updateTaskData = { isComplete: !isComplete, id: id };
+  const [thisTask, setThisTask] = useState(task);
+  const updateTaskData = { isComplete: !thisTask.isComplete, id: id };
 
   const toggleComplete = () => {
     //console.log(updateTaskData);
     updateTask(updateTaskData)
       .then((response) => {
         console.log(response);
+        setThisTask(response);
       })
       .catch((e) => console.warn(e));
   };
@@ -49,11 +58,11 @@ const TaskCard = ({
   return (
     <article className={styles.container}>
       <div className={styles.checkbox_container} onClick={toggleComplete}>
-        {isComplete ? <CheckSquare size={32} /> : <Square size={32} />}
+        {thisTask.isComplete ? <CheckSquare size={32} /> : <Square size={32} />}
       </div>
       <span className={styles.span} onClick={selectTask}>
-        <p className={isComplete ? styles.checked_task : undefined}>
-          {taskName}
+        <p className={thisTask.isComplete ? styles.checked_task : undefined}>
+          {thisTask.task}
         </p>
 
         <div className={styles.checkbox_container}>

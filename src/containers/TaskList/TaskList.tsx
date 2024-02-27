@@ -16,6 +16,7 @@ const TaskList = ({ tasks }: TaskListProps) => {
         tasks.map((task) => {
           return (
             <TaskCard
+              task={task}
               key={task.id}
               id={task.id}
               taskName={task.task}
