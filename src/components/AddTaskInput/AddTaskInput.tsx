@@ -5,6 +5,7 @@ import { TaskData, addNewTask } from "../../services/task-services";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
+import { toast } from "react-toastify";
 
 export interface AddTaskInputProps {
   taskCount: number;
@@ -43,7 +44,10 @@ const AddTaskInput = ({ taskCount, setTaskCount }: AddTaskInputProps) => {
         setTaskCount(taskCount + 1);
         reset();
       })
-      .catch((e) => console.warn(e));
+      .catch((e) => {
+        console.warn(e);
+        toast.error(e.message);
+      });
   };
 
   //clicking icon focuses input
