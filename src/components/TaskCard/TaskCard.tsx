@@ -14,9 +14,13 @@ export interface TaskCardProps {
   isComplete: boolean;
   selectedTask?: number | null;
   setSelectedTask: (taskId: number) => unknown;
+  taskCount: number;
+  setTaskCount: (value: number) => unknown;
 }
 
 const TaskCard = ({
+  taskCount,
+  setTaskCount,
   task,
   taskName,
   isComplete,
@@ -51,6 +55,7 @@ const TaskCard = ({
     deleteTaskById({ id: id })
       .then((response) => {
         console.log(response);
+        setTaskCount(taskCount - 1);
       })
       .catch((e) => console.warn(e));
   };

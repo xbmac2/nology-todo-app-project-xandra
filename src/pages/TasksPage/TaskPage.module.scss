@@ -8,4 +8,18 @@
   max-height: 600px;
 
   overflow-y: scroll;
+
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+}
+
+.container::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+.task_count {
+  color: rgb(161, 161, 161);
+  text-align: end;
+  font-size: smaller;
+  padding: 0px 12px;
 }

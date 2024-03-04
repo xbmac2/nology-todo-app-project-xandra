@@ -5,9 +5,11 @@ import styles from "./TaskList.module.scss";
 
 export interface TaskListProps {
   tasks: TaskData[] | null;
+  taskCount: number;
+  setTaskCount: (value: number) => unknown;
 }
 
-const TaskList = ({ tasks }: TaskListProps) => {
+const TaskList = ({ tasks, taskCount, setTaskCount }: TaskListProps) => {
   const [selectedTask, setSelectedTask] = useState(0);
 
   return (
@@ -23,6 +25,8 @@ const TaskList = ({ tasks }: TaskListProps) => {
               isComplete={task.isComplete}
               selectedTask={selectedTask}
               setSelectedTask={setSelectedTask}
+              taskCount={taskCount}
+              setTaskCount={setTaskCount}
             />
           );
         })}
