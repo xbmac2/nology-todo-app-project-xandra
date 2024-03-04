@@ -12,7 +12,7 @@ const TasksPage = () => {
   useEffect(() => {
     getAllTasks()
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         setTasks(data);
         setTaskCount(data.length);
       })
@@ -23,7 +23,7 @@ const TasksPage = () => {
     <main className={styles.container}>
       <Header />
 
-      <AddTaskInput />
+      <AddTaskInput taskCount={taskCount} setTaskCount={setTaskCount} />
       <p className={styles.task_count}>{taskCount} tasks</p>
       <TaskList
         tasks={tasks}

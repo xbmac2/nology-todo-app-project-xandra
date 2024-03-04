@@ -21,8 +21,8 @@ const TaskList = ({ tasks, taskCount, setTaskCount }: TaskListProps) => {
               task={task}
               key={task.id}
               id={task.id}
-              taskName={task.task}
-              isComplete={task.isComplete}
+              //taskName={task.task}
+              //isComplete={task.isComplete}
               selectedTask={selectedTask}
               setSelectedTask={setSelectedTask}
               taskCount={taskCount}
