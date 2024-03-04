@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TaskCard from "../../components/TaskCard/TaskCard";
+import TaskItem from "../../components/TaskItem/TaskItem";
 import { TaskData } from "../../services/task-services";
 import styles from "./TaskList.module.scss";
 
@@ -17,7 +17,7 @@ const TaskList = ({ tasks, taskCount, setTaskCount }: TaskListProps) => {
       {tasks &&
         tasks.map((task) => {
           return (
-            <TaskCard
+            <TaskItem
               task={task}
               key={task.id}
               id={task.id}

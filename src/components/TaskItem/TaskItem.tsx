@@ -4,11 +4,11 @@ import {
   deleteTaskById,
   TaskData,
 } from "../../services/task-services";
-import styles from "./TaskCard.module.scss";
+import styles from "./TaskItem.module.scss";
 import { Square, CheckSquare, Trash } from "@phosphor-icons/react";
 import { toast } from "react-toastify";
 
-export interface TaskCardProps {
+export interface TaskItemProps {
   task: TaskData;
   id: number;
   // taskName: string;
@@ -19,14 +19,14 @@ export interface TaskCardProps {
   setTaskCount: (value: number) => unknown;
 }
 
-const TaskCard = ({
+const TaskItem = ({
   taskCount,
   setTaskCount,
   task,
   id,
   selectedTask,
   setSelectedTask,
-}: TaskCardProps) => {
+}: TaskItemProps) => {
   const [thisTask, setThisTask] = useState(task);
   const updateTaskData = { isComplete: !thisTask.isComplete, id: id };
 
@@ -85,4 +85,4 @@ const TaskCard = ({
   );
 };
 
-export default TaskCard;
+export default TaskItem;
