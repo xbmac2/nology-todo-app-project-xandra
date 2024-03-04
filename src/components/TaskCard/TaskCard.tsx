@@ -6,6 +6,7 @@ import {
 } from "../../services/task-services";
 import styles from "./TaskCard.module.scss";
 import { Square, CheckSquare, Trash } from "@phosphor-icons/react";
+import { toast } from "react-toastify";
 
 export interface TaskCardProps {
   task: TaskData;
@@ -36,16 +37,20 @@ const TaskCard = ({
         console.log(response);
         setThisTask(response);
       })
-      .catch((e) => console.warn(e));
+      .catch((e) => {
+        console.warn(e);
+        toast.error(e.message);
+      });
   };
 
   const selectTask = () => {
     //could make below ternary
-    if (selectedTask === id) {
-      setSelectedTask(0);
-    } else {
-      setSelectedTask(id);
-    }
+    // if (selectedTask === id) {
+    //   setSelectedTask(0);
+    // } else {
+    //   setSelectedTask(id);
+    // }
+    selectedTask === id ? setSelectedTask(0) : setSelectedTask(id);
   };
 
   const deleteTask = () => {
@@ -55,7 +60,9 @@ const TaskCard = ({
         console.log(response);
         setTaskCount(taskCount - 1);
       })
-      .catch((e) => console.warn(e));
+      .catch((e) => {
+        toast.error(e.message);
+      });
   };
 
   return (
