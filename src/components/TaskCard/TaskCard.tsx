@@ -10,16 +10,18 @@ import { Square, CheckSquare, Trash } from "@phosphor-icons/react";
 export interface TaskCardProps {
   task: TaskData;
   id: number;
-  taskName: string;
-  isComplete: boolean;
+  // taskName: string;
+  // isComplete: boolean;
   selectedTask?: number | null;
   setSelectedTask: (taskId: number) => unknown;
+  taskCount: number;
+  setTaskCount: (value: number) => unknown;
 }
 
 const TaskCard = ({
+  taskCount,
+  setTaskCount,
   task,
-  taskName,
-  isComplete,
   id,
   selectedTask,
   setSelectedTask,
@@ -51,6 +53,7 @@ const TaskCard = ({
     deleteTaskById({ id: id })
       .then((response) => {
         console.log(response);
+        setTaskCount(taskCount - 1);
       })
       .catch((e) => console.warn(e));
   };

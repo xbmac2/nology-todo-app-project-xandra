@@ -7,21 +7,29 @@ import Header from "../../containers/Header/Header";
 
 const TasksPage = () => {
   const [tasks, setTasks] = useState<TaskData[] | null>(null);
+  const [taskCount, setTaskCount] = useState(0);
 
   useEffect(() => {
     getAllTasks()
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         setTasks(data);
+        setTaskCount(data.length);
       })
       .catch((e) => console.warn(e.message));
-  }, []);
+  }, [taskCount]);
 
   return (
     <main className={styles.container}>
       <Header />
-      <AddTaskInput />
-      <TaskList tasks={tasks} />
+
+      <AddTaskInput taskCount={taskCount} setTaskCount={setTaskCount} />
+      <p className={styles.task_count}>{taskCount} tasks</p>
+      <TaskList
+        tasks={tasks}
+        taskCount={taskCount}
+        setTaskCount={setTaskCount}
+      />
     </main>
   );
 };
