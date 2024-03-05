@@ -5,8 +5,8 @@ import styles from "./TaskList.module.scss";
 
 export interface TaskListProps {
   tasks: TaskData[] | null;
-  taskCount: number;
-  setTaskCount: (value: number) => unknown;
+  taskCount?: number;
+  setTaskCount?: (value: number) => unknown;
 }
 
 const TaskList = ({ tasks, taskCount, setTaskCount }: TaskListProps) => {

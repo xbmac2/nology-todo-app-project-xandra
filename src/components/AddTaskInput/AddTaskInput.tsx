@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import styles from "./AddTaskInput.module.scss";
-import { Plus } from "@phosphor-icons/react";
+import { Plus } from "@phosphor-icons/react/dist/ssr";
 import { TaskData, addNewTask } from "../../services/task-services";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,8 +8,8 @@ import { useRef } from "react";
 import { toast } from "react-toastify";
 
 export interface AddTaskInputProps {
-  taskCount: number;
-  setTaskCount: (value: number) => unknown;
+  taskCount?: number;
+  setTaskCount?: (value: number) => unknown;
 }
 
 const AddTaskInput = ({ taskCount, setTaskCount }: AddTaskInputProps) => {
@@ -41,7 +41,8 @@ const AddTaskInput = ({ taskCount, setTaskCount }: AddTaskInputProps) => {
     addNewTask(data)
       .then((response) => {
         console.log(response);
-        setTaskCount(taskCount + 1);
+        if (taskCount !== undefined && setTaskCount)
+          setTaskCount(taskCount + 1);
         reset();
       })
       .catch((e) => {
@@ -60,7 +61,7 @@ const AddTaskInput = ({ taskCount, setTaskCount }: AddTaskInputProps) => {
   return (
     <form className={styles.container} onSubmit={handleSubmit(addTaskHandler)}>
       <div className={styles.icon_container} onClick={handleIconClick}>
-        <Plus size={30} />
+        <Plus size={30} data-testid="plus-icon" />
       </div>
       <input
         {...rest}
@@ -74,6 +75,7 @@ const AddTaskInput = ({ taskCount, setTaskCount }: AddTaskInputProps) => {
           inputRef.current = e;
         }}
         // ref={ref}
+        data-testid="new-task-input"
       />
       {/* <input type="hidden" {...register("isComplete")} /> */}
     </form>
