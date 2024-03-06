@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import styles from "./AddTaskInput.module.scss";
-import { Plus } from "@phosphor-icons/react/dist/ssr";
+import { Plus, ListDashes } from "@phosphor-icons/react/dist/ssr";
 import { TaskData, addNewTask } from "../../services/task-services";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 
 export interface AddTaskInputProps {
@@ -40,6 +40,9 @@ const AddTaskInput = ({
 
   // register("isComplete", { value: false });
   console.log(errors, "errors");
+  // useEffect(() => {
+  //   toast.error("Cannot add a blank task");
+  // }, [errors]);
 
   // const addTaskHandler = (data: Partial<TaskData>) => {
   //   console.log(data);
@@ -65,8 +68,12 @@ const AddTaskInput = ({
   //clicking icon focuses input
   const inputRef = useRef<null | HTMLInputElement>(null);
 
-  const handleIconClick = () => {
+  const focusInput = () => {
     inputRef.current?.focus();
+
+    // document.activeElement === inputRef.current
+    //   ? inputRef.current?.blur()
+    //   : inputRef.current?.focus();
   };
 
   return (
@@ -75,8 +82,8 @@ const AddTaskInput = ({
       onSubmit={handleSubmit(addTaskHandler)}
       data-testid="my-form"
     >
-      <div className={styles.icon_container} onClick={handleIconClick}>
-        <Plus size={30} data-testid="plus-icon" />
+      <div className={styles.icon_container} onClick={focusInput}>
+        <ListDashes size={30} data-testid="list-icon" />
       </div>
       <input
         {...rest}
@@ -92,7 +99,13 @@ const AddTaskInput = ({
         // ref={ref}
         data-testid="new-task-input"
       />
-      <button onClick={handleSubmit(addTaskHandler)}>clickme</button>
+      {/* <button>clickme</button> */}
+      <div
+        className={styles.icon_container}
+        onClick={handleSubmit(addTaskHandler)}
+      >
+        <Plus size={30} data-testid="plus-icon" />
+      </div>
       {/* <input type="hidden" {...register("isComplete")} /> */}
     </form>
   );

@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import TaskItem from "./TaskItem";
 import { userEvent } from "@testing-library/user-event";
-import { deleteTaskById } from "../../services/task-services";
+import * as taskServices from "../../services/task-services";
 
 const sampleTaskData = {
   id: 28,
@@ -12,8 +12,13 @@ const sampleTaskData = {
 
 describe("Task Item", () => {
   it("should display task name and completed status", () => {
+    const myMock = vi.fn(() => console.log("mock deleted"));
     const rendered = render(
-      <TaskItem task={sampleTaskData} id={sampleTaskData.id} />
+      <TaskItem
+        task={sampleTaskData}
+        id={sampleTaskData.id}
+        deleteTask={myMock}
+      />
     );
     const taskName = rendered.getByText("Clean kitchen");
     expect(taskName).toBeInTheDocument();
@@ -35,59 +40,40 @@ describe("Task Item", () => {
   //   expect(uncheckedBox).toBeInTheDocument();
   // });
 
-  it("should delete task when bin icon is clicked", async () => {
+  it("should call updateTask when checkbox is clicked", async () => {
+    const spyUpdateTask = vi.spyOn(taskServices, "updateTask");
+    const myMock = vi.fn(() => console.log("mock deleted"));
+    const rendered = render(
+      <TaskItem
+        task={sampleTaskData}
+        id={sampleTaskData.id}
+        deleteTask={myMock}
+      />
+    );
+    const checkContainer = rendered.getByTestId("check-container");
+    const checkedBox = rendered.getByTestId("checked-box");
+    expect(checkedBox).toBeInTheDocument();
+    const user = userEvent.setup();
+    await user.click(checkContainer);
+    // const uncheckedBox = rendered.getByTestId("unchecked-box");
+    // expect(uncheckedBox).toBeInTheDocument();
+    expect(spyUpdateTask).toHaveBeenCalled();
+  });
+
+  it("should call deleteTask when bin icon is clicked", async () => {
+    const myMock = vi.fn(() => console.log("mock deleted"));
     const rendered = render(
       <TaskItem
         task={sampleTaskData}
         id={sampleTaskData.id}
         selectedTask={sampleTaskData.id}
+        deleteTask={myMock}
       />
     );
     const binIcon = rendered.getByTestId("bin-icon");
     expect(binIcon).toBeInTheDocument();
-
-    //vi mocks
-    //vi.mocked(deleteTaskById).mockReturnValue(Promise.resolve(204));
     const user = userEvent.setup();
     await user.click(binIcon);
-    //expect(deleteTaskById).toHaveBeenCalled();
-
-    //mock the fetch request
-    // const spyFetch2 = vi.spyOn(window, "fetch");
-    // const spyDelete = vi
-    //   .spyOn(TaskItem, "deleteTask")
-    //   .mockImplementation(() => 204);
-
-    // spyFetch.mockResolvedValue({
-    //   status: 204,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   ok: false,
-    //   redirected: false,
-    //   statusText: "",
-    //   type: "error",
-    //   url: "",
-    //   clone: function (): Response {
-    //     throw new Error("Function not implemented.");
-    //   },
-    //   body: null,
-    //   bodyUsed: false,
-    //   arrayBuffer: function (): Promise<ArrayBuffer> {
-    //     throw new Error("Function not implemented.");
-    //   },
-    //   blob: function (): Promise<Blob> {
-    //     throw new Error("Function not implemented.");
-    //   },
-    //   formData: function (): Promise<FormData> {
-    //     throw new Error("Function not implemented.");
-    //   },
-    //   json: function (): Promise<any> {
-    //     throw new Error("Function not implemented.");
-    //   },
-    //   text: function (): Promise<string> {
-    //     throw new Error("Function not implemented.");
-    //   },
-    // });
+    expect(myMock).toHaveBeenCalled();
   });
 });

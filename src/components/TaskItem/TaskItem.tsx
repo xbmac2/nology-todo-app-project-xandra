@@ -17,9 +17,11 @@ export interface TaskItemProps {
   setSelectedTask?: (taskId: number) => unknown;
   taskCount?: number;
   setTaskCount?: (value: number) => unknown;
+  deleteTask: (id: number) => unknown;
 }
 
 const TaskItem = ({
+  deleteTask,
   taskCount,
   setTaskCount,
   task,
@@ -55,16 +57,20 @@ const TaskItem = ({
     }
   };
 
-  const deleteTask = () => {
-    console.log("task with following id will be deleted", id);
-    deleteTaskById({ id: id })
-      .then((response) => {
-        console.log(response);
-        if (setTaskCount && taskCount) setTaskCount(taskCount - 1);
-      })
-      .catch((e) => {
-        toast.error(e.message);
-      });
+  // const deleteTask = () => {
+  //   console.log("task with following id will be deleted", id);
+  //   deleteTaskById({ id: id })
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (setTaskCount && taskCount) setTaskCount(taskCount - 1);
+  //     })
+  //     .catch((e) => {
+  //       toast.error(e.message);
+  //     });
+  // };
+
+  const handleBinClick = () => {
+    deleteTask(thisTask.id);
   };
 
   return (
@@ -94,8 +100,8 @@ const TaskItem = ({
             <Trash
               size={27}
               weight="light"
-              onClick={deleteTask}
               data-testid="bin-icon"
+              onClick={handleBinClick}
             />
           )}
         </div>
