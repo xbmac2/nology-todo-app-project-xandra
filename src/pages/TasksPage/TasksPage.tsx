@@ -17,10 +17,8 @@ const TasksPage = () => {
   useEffect(() => {
     getAllTasks()
       .then((data) => {
-        //console.log(data);
         setTasks(data);
         setTaskCount(data.length);
-        //toast.success("got tasks");
       })
       .catch((e) => {
         //console.warn(e.message);
@@ -32,9 +30,7 @@ const TasksPage = () => {
   const addTaskSubmit = (data: Partial<TaskData>) => {
     addNewTask(data)
       .then((response) => {
-        console.log(response);
-        if (taskCount !== undefined && setTaskCount)
-          setTaskCount(taskCount + 1);
+        setTaskCount(taskCount + 1);
       })
       .catch((e) => {
         console.warn(e);
@@ -46,11 +42,7 @@ const TasksPage = () => {
     <main className={styles.container}>
       <Header />
 
-      <AddTaskInput
-        addTaskSubmit={addTaskSubmit}
-        taskCount={taskCount}
-        setTaskCount={setTaskCount}
-      />
+      <AddTaskInput addTaskSubmit={addTaskSubmit} />
       <p className={styles.task_count}>{taskCount} tasks</p>
       <TaskList
         tasks={tasks}

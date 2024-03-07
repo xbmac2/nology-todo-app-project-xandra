@@ -15,10 +15,8 @@ const TaskList = ({ tasks, taskCount, setTaskCount }: TaskListProps) => {
 
   //defining delete function
   const deleteTask = (id: number) => {
-    console.log("task with following id will be deleted", id);
     deleteTaskById({ id: id })
       .then((response) => {
-        console.log(response);
         if (setTaskCount && taskCount) setTaskCount(taskCount - 1);
       })
       .catch((e) => {
@@ -35,12 +33,8 @@ const TaskList = ({ tasks, taskCount, setTaskCount }: TaskListProps) => {
               task={task}
               key={task.id}
               id={task.id}
-              //taskName={task.task}
-              //isComplete={task.isComplete}
               selectedTask={selectedTask}
               setSelectedTask={setSelectedTask}
-              taskCount={taskCount}
-              setTaskCount={setTaskCount}
               deleteTask={deleteTask}
             />
           );

@@ -26,20 +26,6 @@ describe("Task Item", () => {
     expect(checkedBox).toBeInTheDocument();
   });
 
-  // it("should toggle completed status on click of checkbox", async () => {
-  //   const rendered = render(
-  //     <TaskItem task={sampleTaskData} id={sampleTaskData.id} />
-  //   );
-  //   const checkContainer = rendered.getByTestId("check-container");
-  //   const checkedBox = rendered.getByTestId("checked-box");
-  //   expect(checkedBox).toBeInTheDocument();
-  //   const user = userEvent.setup();
-  //   await user.click(checkContainer);
-  //   // fireEvent.click(checkContainer);
-  //   const uncheckedBox = rendered.getByTestId("unchecked-box");
-  //   expect(uncheckedBox).toBeInTheDocument();
-  // });
-
   it("should call updateTask when checkbox is clicked", async () => {
     const spyUpdateTask = vi.spyOn(taskServices, "updateTask");
     const myMock = vi.fn(() => console.log("mock deleted"));
@@ -55,8 +41,7 @@ describe("Task Item", () => {
     expect(checkedBox).toBeInTheDocument();
     const user = userEvent.setup();
     await user.click(checkContainer);
-    // const uncheckedBox = rendered.getByTestId("unchecked-box");
-    // expect(uncheckedBox).toBeInTheDocument();
+
     expect(spyUpdateTask).toHaveBeenCalled();
   });
 
