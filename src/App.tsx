@@ -6,25 +6,28 @@ import "./App.scss";
 import "react-toastify/dist/ReactToastify.css";
 
 import AppWrapper from "./containers/AppWrapper/AppWrapper";
+import EditModeContextProvider from "./context/EditModeContextProvider";
 
 function App() {
   return (
     <>
       {/* <TasksPage /> */}
-      <AppWrapper />
-      <ToastContainer
-        position="bottom-center"
-        autoClose={4000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        transition={Slide}
-      />
+      <EditModeContextProvider>
+        <AppWrapper />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={4000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Slide}
+        />
+      </EditModeContextProvider>
     </>
   );
 }
