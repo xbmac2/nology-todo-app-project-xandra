@@ -1,15 +1,30 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import { useEffect, useState } from "react";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
+import { ToastContainer, Slide } from "react-toastify";
 import "./App.scss";
-import TasksPage from "./pages/TasksPage/TasksPage";
+import "react-toastify/dist/ReactToastify.css";
+
+import AppWrapper from "./containers/AppWrapper/AppWrapper";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <TasksPage />
+      {/* <TasksPage /> */}
+      <AppWrapper />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={4000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Slide}
+      />
     </>
   );
 }

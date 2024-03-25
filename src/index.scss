@@ -17,6 +17,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Sarabun", sans-serif;
+  color: white;
+}
+
+p,
+input {
+  font-size: 16px;
 }
 
 a {
@@ -30,15 +37,16 @@ a:hover {
 
 // body {
 //   margin: 0;
-//   display: flex;
-//   place-items: center;
-//   min-width: 320px;
-//   min-height: 100vh;
+
+//   //place-items: center;
+//   // min-width: 320px;
+//   // min-height: 100vh;
 // }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: "Philosopher", sans-serif;
 }
 
 // button {

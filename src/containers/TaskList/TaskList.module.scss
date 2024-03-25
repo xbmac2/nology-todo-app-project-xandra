@@ -1,3 +1,19 @@
 .container {
-  border: 1px solid blue;
+  //border: 1px solid blue;
+  max-height: calc(600px - 191px);
+
+  overflow-y: scroll;
+
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+}
+
+/* hide scrollbar but allow scrolling */
+// element {
+//   -ms-overflow-style: none; /* for Internet Explorer, Edge */
+//   scrollbar-width: none; /* for Firefox */
+//   overflow-y: scroll;
+// }
+.container::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }
