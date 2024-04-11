@@ -1,7 +1,7 @@
 # To Do App Frontend
 
 This project is the frontend for a full stack To Do app using React/TypeScript.
-The corresponding backend repo can be found [here.](https://github.com/xbmac2/nology-todo-backend-xandra)
+The corresponding backend repo can be found here: https://github.com/xbmac2/nology-todo-backend-xandra
 
 ![screenshot](./src/assets/ToDo-Frontend-Screenshot.png)
 

@@ -29,7 +29,7 @@ const TasksPage = () => {
   //putting function in the parent
   const addTaskSubmit = (data: Partial<TaskData>) => {
     addNewTask(data)
-      .then((response) => {
+      .then(() => {
         setTaskCount(taskCount + 1);
       })
       .catch((e) => {

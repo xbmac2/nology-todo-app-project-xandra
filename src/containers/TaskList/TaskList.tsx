@@ -16,7 +16,7 @@ const TaskList = ({ tasks, taskCount, setTaskCount }: TaskListProps) => {
   //defining delete function
   const deleteTask = (id: number) => {
     deleteTaskById({ id: id })
-      .then((response) => {
+      .then(() => {
         if (setTaskCount && taskCount) setTaskCount(taskCount - 1);
       })
       .catch((e) => {
